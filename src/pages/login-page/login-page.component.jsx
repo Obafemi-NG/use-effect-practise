@@ -1,40 +1,33 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Card from '../../components/card/card.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
 
 import './login-page.styles.css';
 
-const LoginPage = () => {
-    // const [loginDetails, setLoginDetails] = useState({
-    //     email : '',
-    //     password : '',
-    // })
+const LoginPage = (props) => {
     const [email, setEmail] = useState('');
     const [password , setPassword] = useState('');
     const [isEmailValid, setIsEmailValid] = useState();
     const [isPasswordValid, setIsPasswordValid] = useState();
     const [isFormValid, setIsFormValid] = useState(false);
 
-    // const onChangeHandler = (e) => {
-    //     const {name, value} = e.target;
-    //     setLoginDetails({
-    //         [name] : value,
-    //     })
-    //     setIsFormValid(
-    //         loginDetails.password.trim().length > 6 && loginDetails.email.includes('@')
-            
-    //     );
-    // }
+
+    useEffect(() => {
+        setTimeout(() => {
+            console.log('typed')
+            setIsFormValid(password.trim().length > 6 && email.includes('@'));
+        }, 300)
+
+    }, [password, email])
+
     const onChangeEmailHandler = (e) => {
         setEmail(e.target.value);
-        setIsFormValid(e.target.value.includes('@') && password.trim().length > 6);
     }
 
     const onChangePasswordHandler = (e) => {
         setPassword(e.target.value);
-        setIsFormValid(e.target.value.trim().length > 6 && email.includes('@'));
     }
 
     const validateEmailHandler = () => {
@@ -47,6 +40,7 @@ const LoginPage = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        props.onLogin(email, password)
     }
 
     return(
@@ -77,7 +71,7 @@ const LoginPage = () => {
                     />
                 </div>
                 <div className="actions">
-                    <CustomButton type="submit" className= "btn" disabled={!isFormValid}>
+                    <CustomButton type="submit" className= "btn" disabled={!isFormValid} onClick = {submitHandler } >
                         Login
                     </CustomButton>
                 </div>

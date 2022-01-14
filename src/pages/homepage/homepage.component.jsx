@@ -7,7 +7,13 @@ const Homepage = () => {
     return (
         <React.Fragment>
             <Card>
-                Welcome Back!
+                <div className = 'home-container' > 
+                    <h2>
+                        Welcome Back!
+                    </h2>
+                    
+                </div>
+                
             </Card>
         </React.Fragment>
     )

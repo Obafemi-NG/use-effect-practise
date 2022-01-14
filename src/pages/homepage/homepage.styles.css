@@ -1,0 +1,10 @@
+.home-container {
+    width: 80%;
+    max-width: 40rem;
+    margin: 10rem auto;
+    padding: 0.5rem;
+}
+
+.home-container h2{
+    text-align: center;
+}
