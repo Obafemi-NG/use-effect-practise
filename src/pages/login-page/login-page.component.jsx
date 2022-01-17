@@ -15,10 +15,14 @@ const LoginPage = (props) => {
 
 
     useEffect(() => {
-        setTimeout(() => {
+        const identifier = setTimeout(() => {
             console.log('typed')
             setIsFormValid(password.trim().length > 6 && email.includes('@'));
-        }, 300)
+        }, 300);
+        return(() => {
+            console.log('CLEAN_UP');
+            clearTimeout(identifier);
+        }) 
 
     }, [password, email])
 
@@ -46,7 +50,7 @@ const LoginPage = (props) => {
     return(
         <Card  >
             <form className = 'login-container' onSubmit = {submitHandler}>
-                <div className = {`control ${isEmailValid === false ? 'invailid' : '' }` } >
+                <div className = {`control ${isEmailValid === false ? 'invalid' : '' }` } >
                     <label > Email Address </label>
                     <input
                         type="email"
@@ -59,7 +63,7 @@ const LoginPage = (props) => {
 
                 </div>
 
-                <div className = {`control ${isPasswordValid === false ? 'invailid' : '' }` } >
+                <div className = {`control ${isPasswordValid === false ? 'invalid' : '' }` } >
                     <label > Password </label>
                     <input
                         type="password"
