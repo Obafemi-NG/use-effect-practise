@@ -1,23 +1,25 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './navbar.styles.css';
+import AuthContext from '../store/auth-context';
 
-const Navbar = (props) => {
+const Navbar = () => {
+    const ctx = useContext(AuthContext)
     return(
         <nav className= "nav">
             <ul>
-                {props.isLoggedIn && (
+                {ctx.isLoggedIn && (
                     <li>
                     <a href="/">Users</a>
                     </li>
                 )}
-                {props.isLoggedIn && (
+                {ctx.isLoggedIn && (
                     <li>
                     <a href="/">Admin</a>
                     </li>
                 )}
-                {props.isLoggedIn && (
+                {ctx.isLoggedIn && (
                     <li>
-                        <button onClick={props.onLogout}>Logout</button>
+                        <button onClick={ctx.onLogOut}>Logout</button>
                     </li>
                 )}
             </ul>

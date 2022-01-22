@@ -1,8 +1,9 @@
 import React from 'react';
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useContext } from 'react';
 
 import Card from '../../components/card/card.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
+import AuthContext from '../../components/store/auth-context';
 
 import './login-page.styles.css';
 
@@ -29,7 +30,8 @@ const initialState = {
 
 
 
-const LoginPage = (props) => {
+const LoginPage = () => {
+    
     // const [email, setEmail] = useState('');
     // const [password , setPassword] = useState('');
     // const [isEmailValid, setIsEmailValid] = useState();
@@ -64,6 +66,8 @@ const LoginPage = (props) => {
     //     // setIsFormValid(formState.isPasswordValid)
     // }
 
+    const authCtx =  useContext(AuthContext);
+
     const handleTextChange = e => {
         dispatchForm({
             type : 'HANDLE_INPUT_TEXT',
@@ -82,7 +86,7 @@ const LoginPage = (props) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        props.onLogin(formState.email , formState.password)
+        authCtx.onLogIn(formState.email , formState.password)
     }
 
     return(
